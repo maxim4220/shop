@@ -9,7 +9,7 @@
     <div  class="ap-container" id="parent-product">
     
             <ng-container *ngFor="let product of products">
-                <div class="product-block ">
+                <div class="product-block" (click)="navToProduct(product.id)">
                   <img class="product-image" src="assets/images/{{product.img}}" alt="Loading...">
 
                   <div class="p-2">
