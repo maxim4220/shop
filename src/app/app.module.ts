@@ -3,16 +3,36 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { appRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProductsService } from './_services/products.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CatalogComponent
+    CatalogComponent,
+    LoginComponent,
+    RegisterComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    appRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ProductsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

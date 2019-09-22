@@ -1,0 +1,11 @@
+.jumbotron {
+    height: 1500px;
+}
+
+.container {
+    max-width:1380px;
+}
+
+.navbar-nav {
+    justify-content: flex-end;
+}
