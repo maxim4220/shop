@@ -8,6 +8,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
+
 export class CatalogComponent implements OnInit {
   // list of products.
   public products:any = [];
@@ -25,13 +26,10 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-   
-  //  console.log('currentUser catalog', this.currentUser);
     // Get catalog products.
     this.productsService.getProducts().subscribe((response) => {
       if(response) {
         this.products = response;
-        console.log('this.products', this.products);
         // Send requests for product reviews.
         this.products.forEach(element => {
          this.showReviews(element.id);
@@ -70,13 +68,9 @@ export class CatalogComponent implements OnInit {
     });
   
    let res = this.products.find(x => x.id == product_id);
-    console.log('res', res);
     if(res) {
       // Add average rate to products and round it to the larger integer (p.s. like many web markets do)
       res = Object.assign(res, {averageRate: Math.ceil(total / counter)}, {totalComents: reviews.length});
-      console.log('res222', res);
-      console.log('prodsss', this.products);
-      
     }
     
   }
