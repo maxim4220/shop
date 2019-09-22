@@ -1,7 +1,7 @@
 
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser; else unregisteredBlock">
-  <div class="navbar-nav container">
+<nav class="navbar navbar-expand" *ngIf="currentUser; else unregisteredBlock">
+  <div class="navbar-nav ap-container">
       <a class="nav-item nav-link" routerLink="/products">Products</a>
       <a class="nav-item nav-link" (click)="logout()">Logout</a>
   </div>
@@ -9,7 +9,7 @@
 
 <ng-template #unregisteredBlock>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="navbar-nav container">
+    <div class="navbar-nav ap-container">
         <a class="nav-item nav-link" routerLink="/products">Products</a>
         <a class="nav-item nav-link" routerLink="/login">Login</a>
         <a class="nav-item nav-link" routerLink="/register">Register</a>
@@ -18,12 +18,12 @@
 </ng-template>
 
 
-<div class="jumbotron">
-  <div class="container">
+<!-- <div class="jumbotron"> -->
+  <div class="ap-container">
       <div class="row">
-          <div class="col-sm-10 offset-sm-1">
+          <div class="col-sm-12">
               <router-outlet></router-outlet>
           </div>
       </div>
   </div>
-</div>
+<!-- </div> -->
