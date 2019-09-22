@@ -46,14 +46,36 @@
   background: #ffffff;;
   cursor:pointer;
   max-width: 24%;
+  transition: transform .3s; /* Animation */
 }
 
 .product-image {
   height: 300px;
-  width:100%;
+  width:90%;
+  transition: all 2s ease-in-out;
 }
 
 .breadcrumb {
   background-color: unset;
   padding: unset;
+}
+
+.product-block:hover {
+  box-shadow: 5px 7px 8px #4930c8;
+}
+
+.custom-view-button {
+  width:100%;
+  background:#A6A6A6;
+  height: 45px;
+  color:white;
+}
+
+.product-block:hover > .custom-view-button {
+ background:#5E3FB7;
+ color:white;
+}
+
+.custom-view-button:hover {
+  font-size:20px;
 }
