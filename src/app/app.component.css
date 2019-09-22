@@ -9,3 +9,12 @@
 .navbar-nav {
     justify-content: flex-end;
 }
+
+.ap-container {
+    width: 1380px;
+    margin: 0 auto;
+}
+
+.navbar {
+    background: #21252F;
+}
