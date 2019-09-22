@@ -1,7 +1,13 @@
 <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 <ng-container *ngIf="products"> 
+    <h1 class="mt-2">Catalog</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">Products catalog</li>
+        </ol>
+    </nav>
     <div  class="ap-container" id="parent-product">
-       
+    
             <ng-container *ngFor="let product of products">
                 <div class="product-block ">
                   <img class="product-image" src="assets/images/{{product.img}}" alt="Loading...">

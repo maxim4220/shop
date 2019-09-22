@@ -52,3 +52,8 @@
   height: 300px;
   width:100%;
 }
+
+.breadcrumb {
+  background-color: unset;
+  padding: unset;
+}
