@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductsService } from './_services/products.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
+import { SingleProductComponent } from './components/single-product/single-product.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
     LoginComponent,
     RegisterComponent,
     LoadingSpinnerComponent,
+    SingleProductComponent,
   ],
   imports: [
     BrowserModule,
