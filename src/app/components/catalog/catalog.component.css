@@ -27,3 +27,28 @@
   border-radius: 10px;
   padding:5px;
 }
+
+
+
+.ap-container {
+  display:flex;
+}
+
+#parent-product {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-block {
+  flex: 1 0 21%; /* explanation below */
+  margin: 5px;
+  height: 450px;
+  background: #ffffff;;
+  cursor:pointer;
+  max-width: 24%;
+}
+
+.product-image {
+  height: 300px;
+  width:100%;
+}

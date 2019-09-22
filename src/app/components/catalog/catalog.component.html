@@ -1,14 +1,27 @@
 <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-
 <ng-container *ngIf="products"> 
-    <div  class="container row">
+    <div  class="ap-container" id="parent-product">
+       
             <ng-container *ngFor="let product of products">
-                <div class="p-2">
-                        <button (click)="showProductDetails(product)" class="btn btn-primary p-2">{{product.title}}</button>
+                <div class="product-block ">
+                  <img class="product-image" src="assets/images/{{product.img}}" alt="Loading...">
+
+                  <div class="p-2">
+                      <ngb-rating [rate]="product.averageRate" ></ngb-rating> <span class="ml-2">{{product.totalComents}} Comments</span> 
+                    <h3>{{product.title}}</h3>
+                    {{product.text}}
+                  </div>
                 </div>
             </ng-container>
-        </div>
+ 
+            </div>
 </ng-container>
+
+
+
+
+
+
 
 <ng-container *ngIf="singleProduct">
         <div class="row">
