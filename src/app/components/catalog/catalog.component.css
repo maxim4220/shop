@@ -1,0 +1,29 @@
+.column {
+  width: 50%;
+  padding: 10px;
+  height: 300px;
+  background-color:#ffffff;
+  min-height: 900px;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #b0c4de;
+}
+.filled {
+  color: #ffffff;
+}
+.bad {
+  color: #deb0b0;
+}
+.filled.bad {
+  color: #ff1e1e;
+}
+
+.reviews {
+  border-width: 3px;
+  border-style: solid;
+  border-color: #1C6EA4;
+  border-radius: 10px;
+  padding:5px;
+}

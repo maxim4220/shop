@@ -1,1 +1,50 @@
-<p>catalog works!</p>
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+<ng-container *ngIf="products"> 
+    <div  class="container row">
+            <ng-container *ngFor="let product of products">
+                <div class="p-2">
+                        <button (click)="showProductDetails(product)" class="btn btn-primary p-2">{{product.title}}</button>
+                </div>
+            </ng-container>
+        </div>
+</ng-container>
+
+<ng-container *ngIf="singleProduct">
+        <div class="row">
+                <div class="column">
+                        <h2 class="p-2">{{singleProduct.title}}</h2>
+                        <img style="width:100px; height:100px" src="assets/images/{{singleProduct.img}}" alt="Loading...">
+                        <h2 class="p-2">Description:</h2>
+                        <p>{{singleProduct.text}}</p>
+                </div>
+                <div class="column">
+                        <!-- <ng-container *ngIf="currentUser; else unregisteredBlock"> -->
+                      <ngb-rating [(rate)]="currentRate" max="5">
+                                <ng-template let-fill="fill" let-index="index">
+                                  <span class="star" [class.filled]="fill === 100" [class.bad]="index < 6" >&#9733;</span>
+                                </ng-template>
+                              </ngb-rating>
+                              <hr>
+                              <pre>Rate: <b>{{currentRate}}</b></pre>
+                                <div class="form-group">
+                                  <label for="comment">Comment:</label>
+                                  <textarea class="form-control" rows="5" id="comment"></textarea>
+                                </div>
+                    <button class="btn-md btn-success">Submit comment</button>
+                              <!-- </ng-container> -->
+                        <!-- <ng-template #unregisteredBlock>
+                              Please <a routerLink="/login">Sing In</a> to leave a review. Don't have an account yet? <a routerLink="/register">Sign Up!</a>
+                        </ng-template> -->
+  
+                  <ng-container *ngIf="reviews">
+                      <h3>Reviews:</h3>
+                      <div *ngFor="let review of reviews.slice().reverse(); let i = index;" class="reviews mb-2">
+                            {{i+1}} {{review.created_by.username}} on {{review.created_at | date: short}} <br>
+                             Comment: {{review.text}}
+                      </div>
+
+                  </ng-container>
+                </div>
+              </div>
+</ng-container>
