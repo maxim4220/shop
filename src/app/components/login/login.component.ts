@@ -3,7 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from '../../_services';
-
+import swal from 'sweetalert2'; 
 
 @Component({templateUrl: 'login.component.html'})
 
@@ -58,8 +58,11 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.authenticationService.isLogedIn.next(true);
             return this.router.navigate(['/products']);
           } else {
-            console.log('data error', data);
-            console.error(data['message']);
+            swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: data['message'],
+              })
           }
           this.loading = false;
         },

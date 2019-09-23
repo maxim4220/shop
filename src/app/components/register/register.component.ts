@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {ConfirmPasswordValidator} from './confirm-password.validator';
 import {AuthenticationService} from '../../_services';
+import swal from 'sweetalert2'; 
 
 @Component({templateUrl: 'register.component.html'})
 
@@ -46,29 +47,24 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-      console.log('this.registerForm', this.registerForm);
-
       return;
     }
-    console.log(this.f.username.value, this.f.password.value);
-
     this.loading = true;
     this.authenticationService.register(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(data => {
-          console.log('data', data);
-          // controls['email']
           if (data['success']) {
-            console.log('is success, sending next!');
             this.authenticationService.shareUserToken(data['token']);
             this.loading = false;
             return  this.router.navigate(['/login']);
           } else {
-            // To DO: add Alert with MSG!
-            console.error(data['message']);
+            swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: data['message'],
+              })
             this.loading = false;
           }
         },
