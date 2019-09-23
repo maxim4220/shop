@@ -51,6 +51,8 @@ export class SingleProductComponent implements OnInit {
 
   // Calculate average rate for each product based on all existing reviews.
   private calculateAverageRate(reviews, product_id) {
+    console.log('calculate called!');
+    
     let total = 0;
     let counter = 0;
     reviews.forEach(element => {
@@ -60,7 +62,7 @@ export class SingleProductComponent implements OnInit {
       }
     });
 
-    let res = this.products.find(x => x.id === product_id);
+    let res = this.products.find(x => x.id == product_id);
     if (res) {
       // Add average rate to products and round it to the larger integer (p.s. like many web markets do)
       res = Object.assign(res, {averageRate: Math.ceil(total / counter)}, {totalComments: reviews.length});
