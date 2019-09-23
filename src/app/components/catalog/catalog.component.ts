@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../_services/products.service';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -21,9 +21,12 @@ export class CatalogComponent implements OnInit {
   currentUser: any;
 
   constructor(private productsService: ProductsService,  private authenticationService: AuthenticationService,config: NgbRatingConfig,
-     private router: Router ) { 
-    config.max = 5;
-    config.readonly = true;
+     private router: Router, public activatedRoute: ActivatedRoute ) { 
+       if(config) {
+        config.max = 5;
+        config.readonly = true;
+       }
+  
     this.authenticationService.isLogedIn.subscribe(x => this.currentUser = x);
   }
 
