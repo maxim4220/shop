@@ -30,7 +30,7 @@
 }
 
 .product-block:hover {
-  box-shadow: 5px 7px 8px #4930c8;
+  box-shadow: 2px 4px 9px #4930c8;
 }
 
 .custom-view-button {
@@ -38,6 +38,7 @@
   background:#A6A6A6;
   height: 45px;
   color:white;
+  text-align:center;
 }
 
 .product-block:hover > .custom-view-button {
