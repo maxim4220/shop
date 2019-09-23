@@ -31,18 +31,29 @@
     </div>
     <!-- <ng-container *ngIf="currentUser; else unregisteredBlock"> -->
     <h1 class="mt-2">Add Review</h1>
+ 
     Add Rate
+
     <ngb-rating [(rate)]="currentRate" max="5">
       <ng-template let-fill="fill" let-index="index">
         <span class="star" [class.filled]="fill === 100" [class.bad]="index < 6">&#9733;</span>
       </ng-template>
     </ngb-rating>
-
-    <div class="form-group">
-      <label for="comment">Your review</label>
-      <textarea  placeholder="Write here..." class="form-control" rows="5" id="comment"></textarea>
-    </div>
-    <button id="comment-button" class="btn-md btn-success mb-4">Submit review</button>
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="comment">Your review</label>
+            <textarea formControlName="review"  placeholder="Write here..." class="form-control" rows="5" id="comment"  [ngClass]="{ 'is-invalid': submitted && f.review.errors }">
+            </textarea>
+            <div *ngIf="submitted && f.review.errors " class="invalid-feedback">
+                <div >Please Make sure to rate and write a review.</div>
+              </div>
+          </div>
+          <button [disabled]="loading" type="submit" id="comment-button" class="btn-md btn-success mb-4">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Submit review</button>
+      </form>
+ 
+  
     <!-- </ng-container> -->
     <!-- <ng-template #unregisteredBlock>
           Please <a routerLink="/login">Sing In</a> to leave a review. Don't have an account yet? <a routerLink="/register">Sign Up!</a>
