@@ -43,10 +43,8 @@ export class AuthenticationService {
   }
 
 
-  // In use - works!!
+  // Send request to register a new user.
   register(username, password) {
-    console.log('username', username);
-    console.log('password', password);
     return this.http.post('http://smktesting.herokuapp.com/api/register/', {username, password});
   }
 

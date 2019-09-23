@@ -19,16 +19,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    console.log('Login component const');
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      console.log('this.authenticationService.currentUserValue', this.authenticationService.currentUserValue);
+      console.log('currentUserValue login', this.authenticationService.currentUserValue);
       /// this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
-    console.log('Login component ngOnInit!');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -46,14 +44,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginForm.invalid) {
       return;
     }
-
     this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
           if (data['success']) {
-            console.log('data success', data);
             this.authenticationService.shareUserToken(data['token']);
             this.authenticationService.isLogedIn.next(true);
             return this.router.navigate(['/products']);
