@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ProductsService} from '../../_services';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-single-product',
@@ -42,7 +43,11 @@ export class SingleProductComponent implements OnInit {
         // Send requests for product reviews.
         this.showSpinner = false;
       }
-    });
+    }, err => {
+      // Server error - show alert!
+      this.showServerErrorAlert();
+       this.loading = false;
+     });
   }
 
   private initReviewForm() {
@@ -59,13 +64,15 @@ export class SingleProductComponent implements OnInit {
         this.calculateAverageRate(this.reviews, product_id);
 
       }
-    });
+    },err => {
+      // Server error - show alert!
+      this.showServerErrorAlert();
+     });
   }
 
   // Calculate average rate for each product based on all existing reviews.
   private calculateAverageRate(reviews, product_id) {
     console.log('calculate called!');
-    
     let total = 0;
     let counter = 0;
     reviews.forEach(element => {
@@ -74,16 +81,12 @@ export class SingleProductComponent implements OnInit {
         counter++;
       }
     });
-
     let res = this.products.find(x => x.id == product_id);
     if (res) {
       // Add average rate to products and round it to the larger integer (p.s. like many web markets do)
       res = Object.assign(res, {averageRate: Math.ceil(total / counter)}, {totalComments: reviews.length});
       this.singleProduct = res;
-      console.log('res', res);
-
     }
-
   }
 
     // convenience getter for easy access to form fields
@@ -92,28 +95,41 @@ export class SingleProductComponent implements OnInit {
     }
 
   public onSubmit() {
-    console.log('submitting the form!!');
-    console.log('rate', this.currentRate);
     this.submitted = true;
     // stop here if form is invalid
     if (this.reviewForm.invalid) {
       return;
     } 
-
     this.loading = true;
-      console.log(this.f.review.value);
       this.productsService.addReview(this.productId,this.currentRate, this.f.review.value, ).subscribe((response) => {
         if (response) {
            console.log('response!!!!!!!!!', response);
-     
+          // TO DO: Push comment to the array of comments.
+          swal.fire({
+            position: 'center',
+            type: 'success',
+            title: 'Your review has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          })
         } else {
           // Add error alert
         }
         this.loading = false;
+      },
+      err => {
+       // Server error - show alert!
+       this.showServerErrorAlert();
+        this.loading = false;
       });
-    
- 
-    
+  }
+
+  private showServerErrorAlert() {
+    swal.fire({
+      type: 'error',
+      title: 'Oops...',
+      text: 'Server error has occured!',
+      })
   }
 
 }
