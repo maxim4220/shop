@@ -48,3 +48,15 @@
 #comment-button {
   float: right;
 }
+
+.checked {
+  color: orange;
+}
+
+.user-rate {
+  float: right;
+}
+
+.ap-average-rate {
+  transform: scale(1.5); 
+}
