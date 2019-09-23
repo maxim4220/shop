@@ -1,7 +1,7 @@
 
 <!-- nav -->
-<nav class="navbar navbar-expand" *ngIf="currentUser; else unregisteredBlock">
-  <div class="navbar-nav ap-container">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser; else unregisteredBlock">
+  <div class="navbar-nav ap-container ">
       <a class="nav-item nav-link" routerLink="/products">Products</a>
       <a class="nav-item nav-link" (click)="logout()">Logout</a>
   </div>
