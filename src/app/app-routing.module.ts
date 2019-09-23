@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { CatalogComponent } from '../app/components/catalog/catalog.component';
-import { LoginComponent } from '../app/components/login/login.component';
-import { RegisterComponent } from '../app/components/register/register.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { SingleProductComponent } from './components/single-product/single-product.component';
 
 const routes: Routes = [

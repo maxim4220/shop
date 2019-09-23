@@ -13,7 +13,6 @@ import {Router} from '@angular/router';
 export class CatalogComponent implements OnInit {
   // list of products.
   public products: any = [];
-  public singleProduct;
   // reviews of selected product.
   public reviews;
   public showSpinner: boolean = true;

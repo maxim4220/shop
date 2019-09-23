@@ -9,7 +9,7 @@ import { appRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ProductsService } from './_services/products.service';
+import { ProductsService } from './_services';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { SingleProductComponent } from './components/single-product/single-product.component';
