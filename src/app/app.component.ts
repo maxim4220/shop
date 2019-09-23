@@ -14,10 +14,8 @@ export class AppComponent {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
-  ) { // TO DO: Add logic for logout
-    // this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.authenticationService.isLogedIn.subscribe(x => this.currentUser = x);
-    console.log('currentUser APP', this.currentUser);
+  ) { 
+     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   logout() {
