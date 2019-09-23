@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
+const API_DOMAIN = 'http://smktesting.herokuapp.com/api/';
+
 @Injectable()
 export class ProductsService {
 
@@ -12,13 +14,19 @@ export class ProductsService {
    * Get the list of products..
    */
   public getProducts() {
-    const API = 'http://smktesting.herokuapp.com/api/products/';
+    const API = API_DOMAIN + 'products/';
     return this.http.get(API);
   }
 
   public getReviews(productId) {
-    const api = 'http://smktesting.herokuapp.com/api/reviews/' + productId;
-    return this.http.get(api);
+    const API = API_DOMAIN +'reviews/' + productId;
+    return this.http.get(API);
+  }
+
+  public addReview(productId, rate, text) {
+    const API = API_DOMAIN + 'reviews/'+ productId;
+    return this.http.post(API, { rate, text});
+  
   }
 
 }
