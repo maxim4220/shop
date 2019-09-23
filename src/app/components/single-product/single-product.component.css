@@ -1,0 +1,50 @@
+.breadcrumb {
+    background-color: unset;
+    padding: unset;
+  }
+
+  .column {
+    width: 50%;
+    padding: 10px;
+    height: 600px;
+    background-color:#ffffff;
+   
+  }
+  
+  .star {
+    font-size: 1.5rem;
+    color: #b0c4de;
+  }
+  .filled {
+    color: #ffffff;
+  }
+  .bad {
+    color: #deb0b0;
+  }
+  .filled.bad {
+    color: #ff1e1e;
+  }
+
+  #single-product-image {
+    width: 100%;
+    max-height: 550px;
+  }
+
+  #ap-list-reviews {
+    width: 100%;
+    max-height: 440px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .reviews {
+    background: #e3dcdc;
+
+border-radius: 5px;
+
+padding: 5px;
+  }
+
+  #comment-button {
+    float: right;
+  }
