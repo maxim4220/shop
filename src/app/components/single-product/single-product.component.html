@@ -15,15 +15,13 @@
       <div class="column">
         <h2 class="pt-2">{{singleProduct.title}}</h2>
         {{singleProduct.text}} <br>
-        <ngb-rating [rate]="singleProduct.averageRate" max="5">
-          <ng-template let-fill="fill" let-index="index">
-            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 6">&#9733;</span>
-          </ng-template>
-        </ngb-rating>
+        <span *ngFor="let star of [].constructor(singleProduct.averageRate); let i = index" class="fa fa-star checked ap-average-rate p-2"></span> 
         <div id="ap-list-reviews" class="mt-4" *ngIf="reviews">
           <h2>Reviews:</h2>
           <div *ngFor="let review of reviews.slice().reverse(); let i = index;" class="reviews mb-2">
-            {{i + 1}} {{review.created_by.username}} on {{review.created_at | date: short}} <br>
+            {{i + 1}}. {{review.created_by.username}} on {{review.created_at | date: short}} 
+            <span *ngFor="let star of [].constructor(review.rate); let i = index" class="fa fa-star checked user-rate"></span> 
+            <br>
             Comment: {{review.text}}
           </div>
         </div>
@@ -31,7 +29,6 @@
     </div>
     <!-- <ng-container *ngIf="currentUser; else unregisteredBlock"> -->
     <h1 class="mt-2">Add Review</h1>
- 
     Add Rate
 
     <ngb-rating [(rate)]="currentRate" max="5">
