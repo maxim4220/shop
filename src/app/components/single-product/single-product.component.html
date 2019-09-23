@@ -1,61 +1,53 @@
 <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 <ng-container *ngIf="singleProduct">
-        <h1 class="mt-2">Catalog</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active"> <a routerLink="/products">Products catalog</a> </li>
-                <li class="breadcrumb-item active">  Single product</li>
-            </ol>
-        </nav>
-        <div  class="ap-container" id="parent-product">
-        
-                <div class="row">
-                        <div class="column">
-                              
-                                <img id="single-product-image" src="assets/images/{{singleProduct.img}}" alt="Loading...">
-                              
-                        </div>
-                        <div class="column">
-                                <h2 class="pt-2">{{singleProduct.title}}</h2>
-                                {{singleProduct.text}} <br>
-                                <ngb-rating [rate]="singleProduct.averageRate" max="5">
-                                        <ng-template let-fill="fill" let-index="index">
-                                          <span class="star" [class.filled]="fill === 100" [class.bad]="index < 6" >&#9733;</span>
-                                        </ng-template>
-                                      </ngb-rating>
-                          <div id="ap-list-reviews" class="mt-4" *ngIf="reviews">
-                              <h2 >Reviews:</h2>
-                              <div *ngFor="let review of reviews.slice().reverse(); let i = index;" class="reviews mb-2">
-                                    {{i+1}} {{review.created_by.username}} on {{review.created_at | date: short}} <br>
-                                     Comment: {{review.text}}
-                              </div>
-        
-                            </div>
-                        </div>
-                      </div>
-                           
-                                 <!-- <ng-container *ngIf="currentUser; else unregisteredBlock"> -->
-                                        <h1 class="mt-2">Add Review</h1>
-                                      
-                                             Add Rate        <ngb-rating [(rate)]="currentRate" max="5">
-                                                    <ng-template let-fill="fill" let-index="index">
-                                                      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 6" >&#9733;</span>
-                                                    </ng-template>
-                                                  </ngb-rating>
-                                                    
-                                                        <div class="form-group">
-                                                   
-                                                          <textarea placeholder="Write Your review here..." class="form-control" rows="5" id="comment"></textarea>
-                                                        </div>
-                                                        <button id="comment-button" class="btn-md btn-success mb-4">Submit review</button>
-                                       
-                                              <!-- </ng-container> -->
-                                        <!-- <ng-template #unregisteredBlock>
-                                              Please <a routerLink="/login">Sing In</a> to leave a review. Don't have an account yet? <a routerLink="/register">Sign Up!</a>
-                                        </ng-template> -->
-                  
-     
-                </div>
+  <h1 class="mt-2">Catalog</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active"><a routerLink="/products">Products catalog</a></li>
+      <li class="breadcrumb-item active"> Single product</li>
+    </ol>
+  </nav>
+  <div class="ap-container" id="parent-product">
+    <div class="row">
+      <div class="column">
+        <img id="single-product-image" src="assets/images/{{singleProduct.img}}" alt="Loading...">
+      </div>
+      <div class="column">
+        <h2 class="pt-2">{{singleProduct.title}}</h2>
+        {{singleProduct.text}} <br>
+        <ngb-rating [rate]="singleProduct.averageRate" max="5">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 6">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+        <div id="ap-list-reviews" class="mt-4" *ngIf="reviews">
+          <h2>Reviews:</h2>
+          <div *ngFor="let review of reviews.slice().reverse(); let i = index;" class="reviews mb-2">
+            {{i + 1}} {{review.created_by.username}} on {{review.created_at | date: short}} <br>
+            Comment: {{review.text}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <ng-container *ngIf="currentUser; else unregisteredBlock"> -->
+    <h1 class="mt-2">Add Review</h1>
+    Add Rate
+    <ngb-rating [(rate)]="currentRate" max="5">
+      <ng-template let-fill="fill" let-index="index">
+        <span class="star" [class.filled]="fill === 100" [class.bad]="index < 6">&#9733;</span>
+      </ng-template>
+    </ngb-rating>
+
+    <div class="form-group">
+      <label for="comment">Enter Password</label>
+      <textarea  placeholder="Write Your review here..." class="form-control" rows="5" id="comment"></textarea>
+    </div>
+    <button id="comment-button" class="btn-md btn-success mb-4">Submit review</button>
+    <!-- </ng-container> -->
+    <!-- <ng-template #unregisteredBlock>
+          Please <a routerLink="/login">Sing In</a> to leave a review. Don't have an account yet? <a routerLink="/register">Sign Up!</a>
+    </ng-template> -->
+  </div>
 </ng-container>
 
 
