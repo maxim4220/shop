@@ -27,10 +27,10 @@ export class AuthenticationService {
     * remove user from local storage and set current user to null
     */
   logout() {
+    localStorage.removeItem('userNickname');
     localStorage.removeItem('currentUserToken');
     this.currentUserSubject.next(null);
   }
-
 
    /**
     * Send request to register user
