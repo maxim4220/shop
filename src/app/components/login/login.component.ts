@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      console.log('currentUserValue login', this.authenticationService.currentUserValue);
-      /// this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
   }
 
@@ -51,7 +50,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         data => {
           if (data['success']) {
             this.authenticationService.shareUserToken(data['token']);
-            this.authenticationService.isLogedIn.next(true);
             return this.router.navigate(['/products']);
           } else {
             swal.fire({

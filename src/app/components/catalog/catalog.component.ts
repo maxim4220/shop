@@ -24,8 +24,6 @@ export class CatalogComponent implements OnInit {
       config.max = 5;
       config.readonly = true;
     }
-
-    this.authenticationService.isLogedIn.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {

@@ -23,7 +23,9 @@ export class RegisterComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      // this.router.navigate(['/']);
+      console.log();
+      
+       this.router.navigate(['/']);
     }
   }
 
@@ -56,7 +58,6 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
           if (data['success']) {
-            this.authenticationService.shareUserToken(data['token']);
             this.loading = false;
             return  this.router.navigate(['/login']);
           } else {
