@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ProductsService} from '../../_services';
+import {ProductsService, AuthenticationService} from '../../_services';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert2'; 
@@ -17,14 +17,14 @@ export class SingleProductComponent implements OnInit {
   public products;
   public reviews;
   public singleProduct;
-  currentRate = 0;
-  reviewForm: FormGroup;
-  submitted = false;
-  loading = false;
-  hasErrors = false;
+  public currentRate = 0;
+  public reviewForm: FormGroup;
+  public submitted = false;
+  public loading = false;
+  public hasErrors = false;
 
   constructor(private productsService: ProductsService, private activatedRoute: ActivatedRoute, config: NgbRatingConfig,
-    private formBuilder: FormBuilder,) {
+    private formBuilder: FormBuilder, public authenticationService: AuthenticationService) {
     config.max = 5;
     config.readonly = false;
   }
@@ -102,8 +102,8 @@ export class SingleProductComponent implements OnInit {
     } 
     this.loading = true;
       this.productsService.addReview(this.productId,this.currentRate, this.f.review.value, ).subscribe((response) => {
-        if (response) {
-           console.log('response!!!!!!!!!', response);
+        if (response && response['success']) {
+       
           // TO DO: Push comment to the array of comments.
           swal.fire({
             position: 'center',

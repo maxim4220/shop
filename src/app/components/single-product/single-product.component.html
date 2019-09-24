@@ -22,12 +22,12 @@
             {{i + 1}}. {{review.created_by.username}} on {{review.created_at | date: short}} 
             <span *ngFor="let star of [].constructor(review.rate); let i = index" class="fa fa-star checked user-rate"></span> 
             <br>
-            Comment: {{review.text}}
+            {{review.text}}
           </div>
         </div>
       </div>
     </div>
-    <!-- <ng-container *ngIf="currentUser; else unregisteredBlock"> -->
+    <ng-container *ngIf="authenticationService.currentUserValue; else unregisteredBlock">
     <h1 class="mt-2">Add Review</h1>
     Add Rate
 
@@ -51,10 +51,10 @@
       </form>
  
   
-    <!-- </ng-container> -->
-    <!-- <ng-template #unregisteredBlock>
+    </ng-container>
+    <ng-template #unregisteredBlock>
           Please <a routerLink="/login">Sing In</a> to leave a review. Don't have an account yet? <a routerLink="/register">Sign Up!</a>
-    </ng-template> -->
+    </ng-template>
   </div>
 </ng-container>
 
