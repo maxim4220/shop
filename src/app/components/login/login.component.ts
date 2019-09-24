@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           if (data['success']) {
+            localStorage.setItem('userNickname', JSON.stringify(this.f.username.value));
             this.authenticationService.shareUserToken(data['token']);
             return this.router.navigate(['/products']);
           } else {
