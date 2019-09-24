@@ -103,8 +103,11 @@ export class SingleProductComponent implements OnInit {
     this.loading = true;
       this.productsService.addReview(this.productId,this.currentRate, this.f.review.value, ).subscribe((response) => {
         if (response && response['success']) {
-       
-          // TO DO: Push comment to the array of comments.
+         const nickname = localStorage.getItem('userNickname');
+         console.log('nickname;', nickname);
+         // Add comment without reloading the page.
+         this.reviews.push({rate: this.currentRate,text:this.f.review.value, created_by: {username: nickname }, created_at:new Date() });
+         this.reviewForm.get('review').reset();
           swal.fire({
             position: 'center',
             type: 'success',
@@ -113,7 +116,11 @@ export class SingleProductComponent implements OnInit {
             timer: 1500
           })
         } else {
-          // Add error alert
+          swal.fire({
+            type: 'info',
+            title: 'Oops...',
+            text: 'Something went wrong',
+            })
         }
         this.loading = false;
       },
