@@ -31,7 +31,6 @@ export class SingleProductComponent implements OnInit {
   ngOnInit() {
     this.initReviewForm();
     this.productId = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('this.productId ', this.productId);
     // Get catalog products.
     this.productsService.getProducts().subscribe((response) => {
       if (response) {
@@ -71,7 +70,6 @@ export class SingleProductComponent implements OnInit {
 
   // Calculate average rate for each product based on all existing reviews.
   private calculateAverageRate(reviews, product_id) {
-    console.log('calculate called!');
     let total = 0;
     let counter = 0;
     reviews.forEach(element => {
@@ -103,7 +101,6 @@ export class SingleProductComponent implements OnInit {
     this.productsService.addReview(this.productId, this.currentRate, this.f.review.value ).subscribe((response) => {
         if (response && response['success']) {
           const nickname = localStorage.getItem('userNickname');
-          console.log('nickname;', nickname);
           // Add comment without reloading the page.
           this.reviews.push({rate: this.currentRate, text: this.f.review.value, created_by: {username: nickname}, created_at: new Date()});
           this.reviewForm.get('review').reset();
