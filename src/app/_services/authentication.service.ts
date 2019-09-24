@@ -7,17 +7,15 @@ export class AuthenticationService {
   private readonly currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
-  public isLogedIn: Subject<boolean>;
+
 
   // currentUserToken: BehaviorSubject<any>;
   currentUserToken: Subject<any>;
 
   constructor(private http: HttpClient) {
     this.currentUserToken = new Subject;
-    this.isLogedIn = new Subject;
 
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUserToken')));
-    console.log('this.currentUserSubject', this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -25,42 +23,40 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  // login(username, password) {
-  //     return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username, password })
-  //         .pipe(map(user => {
-  //             // store user details and jwt token in local storage to keep user logged in between page refreshes
-  //             localStorage.setItem('currentUser', JSON.stringify(user));
-  //             this.currentUserSubject.next(user);
-  //             return user;
-  //         }));
-  // }
-
+   /**
+    * remove user from local storage and set current user to null
+    */
   logout() {
-    // remove user from local storage and set current user to null
     localStorage.removeItem('currentUserToken');
-    this.isLogedIn.next(false);
     this.currentUserSubject.next(null);
   }
 
 
-  // Send request to register a new user.
+   /**
+    * Send request to register user
+    * @param username: username
+    * @param password: password
+    */
   register(username, password) {
     return this.http.post('http://smktesting.herokuapp.com/api/register/', {username, password});
   }
 
-  shareUserToken(token) {
-    // store user details and jwt token in local storage to keep user logged in between page refreshes
+  /**
+   * Store user details and jwt token in local storage to keep user logged in between page refreshes
+   * Share token of signed in user
+   * @param token: token that will be intercepted and added to http header
+   */
+  shareUserToken(token):void {
     localStorage.setItem('currentUserToken', JSON.stringify(token));
-    console.log('sharing user data with toke...', token);
     this.currentUserSubject.next(token);
-    // return this.currentUserToken.next({data});
   }
 
-
-  // In use - works!!
+   /**
+   * Send request to sign in
+   * @param username: username
+   * @param password: password
+   */
   login(username, password) {
-    console.log('username', username);
-    console.log('password', password);
     return this.http.post('http://smktesting.herokuapp.com/api/login/', {username, password});
   }
 
