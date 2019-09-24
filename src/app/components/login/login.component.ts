@@ -3,7 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from '../../_services';
-import swal from 'sweetalert2'; 
+import swal from 'sweetalert2';
 
 @Component({templateUrl: 'login.component.html'})
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+        this.router.navigate(['/']);
     }
   }
 
@@ -48,16 +48,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe(
         data => {
-          if (data['success']) {
-            localStorage.setItem('userNickname', JSON.stringify(this.f.username.value));
-            this.authenticationService.shareUserToken(data['token']);
-            return this.router.navigate(['/products']);
-          } else {
+          if (!data['success']) {
             swal.fire({
               type: 'error',
               title: 'Oops...',
               text: data['message'],
-              })
+            });
+          } else {
+            localStorage.setItem('userNickname', JSON.stringify(this.f.username.value));
+            this.authenticationService.shareUserToken(data['token']);
+            return this.router.navigate(['/products']);
           }
           this.loading = false;
         },

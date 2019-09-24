@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {ConfirmPasswordValidator} from './confirm-password.validator';
 import {AuthenticationService} from '../../_services';
-import swal from 'sweetalert2'; 
+import swal from 'sweetalert2';
 
 @Component({templateUrl: 'register.component.html'})
 
@@ -23,9 +23,7 @@ export class RegisterComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      console.log();
-      
-       this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
   }
 
@@ -59,14 +57,13 @@ export class RegisterComponent implements OnInit {
       .subscribe(data => {
           if (data['success']) {
             this.loading = false;
-            return  this.router.navigate(['/login']);
+            return this.router.navigate(['/login']);
           } else {
             swal.fire({
               type: 'error',
               title: 'Oops...',
               text: data['message'],
-              })
-            this.loading = false;
+            }).then(() => this.loading = false);
           }
         },
         error => {

@@ -8,7 +8,7 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {
   }
-  
+
   /**
    * Get the list of products..
    */
@@ -22,19 +22,19 @@ export class ProductsService {
    * @param productId: Id of the product
    */
   public getReviews(productId) {
-    const API = API_DOMAIN +'reviews/' + productId;
+    const API = API_DOMAIN + 'reviews/' + productId;
     return this.http.get(API);
   }
 
-   /**
+  /**
    * Add review for the single product
    * @param productId: Id of the product
    * @param rate: product rate
    * @param text: review
    */
   public addReview(productId, rate, text) {
-    const API = API_DOMAIN + 'reviews/'+ productId;
-    return this.http.post(API, { rate, text});
+    const API = API_DOMAIN + 'reviews/' + productId;
+    return this.http.post(API, {rate, text});
   }
 
 }

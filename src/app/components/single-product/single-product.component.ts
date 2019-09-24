@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductsService, AuthenticationService} from '../../_services';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import swal from 'sweetalert2'; 
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-single-product',
@@ -21,10 +21,9 @@ export class SingleProductComponent implements OnInit {
   public reviewForm: FormGroup;
   public submitted = false;
   public loading = false;
-  public hasErrors = false;
 
   constructor(private productsService: ProductsService, private activatedRoute: ActivatedRoute, config: NgbRatingConfig,
-    private formBuilder: FormBuilder, public authenticationService: AuthenticationService) {
+              private formBuilder: FormBuilder, public authenticationService: AuthenticationService) {
     config.max = 5;
     config.readonly = false;
   }
@@ -45,9 +44,9 @@ export class SingleProductComponent implements OnInit {
       }
     }, err => {
       // Server error - show alert!
-      this.showServerErrorAlert();
-       this.loading = false;
-     });
+      SingleProductComponent.showServerErrorAlert();
+      this.loading = false;
+    });
   }
 
   private initReviewForm() {
@@ -64,10 +63,10 @@ export class SingleProductComponent implements OnInit {
         this.calculateAverageRate(this.reviews, product_id);
 
       }
-    },err => {
+    }, err => {
       // Server error - show alert!
-      this.showServerErrorAlert();
-     });
+      SingleProductComponent.showServerErrorAlert();
+    });
   }
 
   // Calculate average rate for each product based on all existing reviews.
@@ -89,54 +88,55 @@ export class SingleProductComponent implements OnInit {
     }
   }
 
-    // convenience getter for easy access to form fields
-    get f() {
-      return this.reviewForm.controls;
-    }
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.reviewForm.controls;
+  }
 
   public onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
     if (this.reviewForm.invalid) {
       return;
-    } 
+    }
     this.loading = true;
-      this.productsService.addReview(this.productId,this.currentRate, this.f.review.value, ).subscribe((response) => {
+    this.productsService.addReview(this.productId, this.currentRate, this.f.review.value ).subscribe((response) => {
         if (response && response['success']) {
-         const nickname = localStorage.getItem('userNickname');
-         console.log('nickname;', nickname);
-         // Add comment without reloading the page.
-         this.reviews.push({rate: this.currentRate,text:this.f.review.value, created_by: {username: nickname }, created_at:new Date() });
-         this.reviewForm.get('review').reset();
+          const nickname = localStorage.getItem('userNickname');
+          console.log('nickname;', nickname);
+          // Add comment without reloading the page.
+          this.reviews.push({rate: this.currentRate, text: this.f.review.value, created_by: {username: nickname}, created_at: new Date()});
+          this.reviewForm.get('review').reset();
           swal.fire({
             position: 'center',
             type: 'success',
             title: 'Your review has been saved',
             showConfirmButton: false,
             timer: 1500
-          })
+          });
         } else {
           swal.fire({
             type: 'info',
             title: 'Oops...',
             text: 'Something went wrong',
-            })
+          });
         }
         this.loading = false;
       },
       err => {
-       // Server error - show alert!
-       this.showServerErrorAlert();
+        // Server error - show alert!
+        SingleProductComponent.showServerErrorAlert();
         this.loading = false;
       });
   }
 
-  private showServerErrorAlert() {
+  // tslint:disable-next-line:member-ordering
+  private static showServerErrorAlert() {
     swal.fire({
       type: 'error',
       title: 'Oops...',
-      text: 'Server error has occured!',
-      })
+      text: 'Server error has occurred!',
+    });
   }
 
 }

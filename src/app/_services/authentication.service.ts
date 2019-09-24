@@ -46,7 +46,7 @@ export class AuthenticationService {
    * Share token of signed in user
    * @param token: token that will be intercepted and added to http header
    */
-  shareUserToken(token):void {
+  shareUserToken(token): void {
     localStorage.setItem('currentUserToken', JSON.stringify(token));
     this.currentUserSubject.next(token);
   }

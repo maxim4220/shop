@@ -16,7 +16,6 @@ export class CatalogComponent implements OnInit {
   // reviews of selected product.
   public reviews;
   public showSpinner: boolean = true;
-  currentUser: any;
 
   constructor(private productsService: ProductsService, private authenticationService: AuthenticationService, config: NgbRatingConfig,
               private router: Router) {
